@@ -4,6 +4,7 @@ import {
   ComponentRef,
   Injectable,
   Injector,
+  inject
   ViewContainerRef,
   EmbeddedViewRef,
   Type
@@ -21,7 +22,7 @@ function isViewContainerRef(x: any): x is ViewContainerRef {
  *
  * @export
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class InjectionService {
   static globalRootViewContainer: ViewContainerRef = null;
 
@@ -38,7 +39,7 @@ export class InjectionService {
   private _container: ViewContainerRef;
 
   constructor(
-    private applicationRef: ApplicationRef,
+    @inject(ApplicationRef) private applicationRef: ApplicationRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector
   ) {}
